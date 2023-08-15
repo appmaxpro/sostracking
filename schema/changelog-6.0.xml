@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
+        logicalFilePath="changelog-6.0">
+
+    <changeSet author="author" id="changelog-6.0">
+
+        <addColumn tableName="tc_positions">
+            <column name="orderid" type="INT" />
+            <column name="driverid" type="INT" />
+        </addColumn>
+
+        <addColumn tableName="tc_events">
+            <column name="orderid" type="INT" />
+            <column name="driverid" type="INT" />
+        </addColumn>
+
+        <addColumn tableName="tc_devices">
+            <column name="workingstatus" type="VARCHAR(128)" />
+            <column name="driverid" type="INT" />
+            <column name="currentorderid" type="INT" />
+        </addColumn>
+
+        <addForeignKeyConstraint
+            baseTableName="tc_devices"
+            baseColumnNames="driverid"
+            constraintName="fk_devices_driverid"
+            referencedTableName="tc_drivers"
+            referencedColumnNames="id"
+            onDelete="RESTRICT"/>
+
+        <addColumn tableName="tc_orders">
+            <column name="deviceid" type="INT" />
+            <column name="driverid" type="INT" />
+            <column name="status" type="VARCHAR(128)" />
+            <column name="orderTime" type="timestamp" />
+            <column name="completedTime" type="timestamp" />
+        </addColumn>
+
+
+    </changeSet>
+
+
+</databaseChangeLog>
